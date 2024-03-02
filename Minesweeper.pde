@@ -28,7 +28,7 @@ void setup ()
 }
 public void setMines()
 {
-    while(mines.size() < 40 /*this will eventually be a var to determine the amount of bombs*/) {
+    while(mines.size() < 5 /*this will eventually be a var to determine the amount of bombs*/) {
       int r = (int)(Math.random()*NUM_ROWS);
       int c = (int)(Math.random()*NUM_COLS);
       if (!mines.contains(buttons[r][c])) {
@@ -176,7 +176,7 @@ public class MSButton
     public void draw () 
     {    
         if (flagged)
-            fill(0);
+            fill(0,0,250);
          else if( clicked && mines.contains(this) ) 
              fill(255,0,0);
         else if(clicked)
