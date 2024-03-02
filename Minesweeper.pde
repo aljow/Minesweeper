@@ -28,7 +28,7 @@ void setup ()
 }
 public void setMines()
 {
-    while(mines.size() < 40 /*this will eventually be a var to determine the amount of bombs*/) {
+    while(mines.size() < 5 /*this will eventually be a var to determine the amount of bombs*/) {
       int r = (int)(Math.random()*NUM_ROWS);
       int c = (int)(Math.random()*NUM_COLS);
       if (!mines.contains(buttons[r][c])) {
@@ -47,7 +47,7 @@ public boolean isWon()
 {
     for (int i = 0; i < buttons.length; i++) {
       for (int j = 0; j < buttons[i].length; j++) {
-        if (buttons[i][j].clicked == false && !mines.contains(buttons[i][j])) {
+        if (buttons[i][j].clicked == false) {
           return false;
         }
       }
@@ -60,8 +60,11 @@ public void displayLosingMessage()
     textSize((float)20);
     for (int i = 0; i < buttons.length; i++) {
       for (int j = 0; j < buttons[i].length; j++) {
-        if (mines.contains(buttons[i][j]))
-         buttons[i][j].clicked = true;
+        if (mines.contains(buttons[i][j])) {
+           buttons[i][j].clicked = true;
+        } else {
+          buttons[i][j].clicked = false;
+        }
       }
     }
     buttons[1][NUM_COLS/2].setLabel("Y");
@@ -128,13 +131,14 @@ public class MSButton
     public void mousePressed () 
     {
         if (isWon() == false && locked == false) {
-          clicked = true;
+          if (flagged == false) {
+            clicked = true;
+          }
           if (mouseButton == RIGHT) {
             if (flagged == false) {
               flagged = true;
             } else {
               flagged = false;
-              clicked = false;
             }
           } else if (mines.contains(buttons[myRow][myCol])) {
             locked = true;
