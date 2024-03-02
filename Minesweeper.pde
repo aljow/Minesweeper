@@ -139,6 +139,7 @@ public class MSButton
               flagged = true;
             } else {
               flagged = false;
+              clicked = false;
             }
           } else if (mines.contains(buttons[myRow][myCol])) {
             locked = true;
