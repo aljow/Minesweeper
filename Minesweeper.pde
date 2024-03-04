@@ -47,8 +47,8 @@ public boolean isWon()
 {
     for (int i = 0; i < buttons.length; i++) {
       for (int j = 0; j < buttons[i].length; j++) {
-        if (buttons[i][j].clicked == false) {
-          return false;
+        if (buttons[i][j].clicked == false && buttons[i][j].flagged == false) {
+           return false;
         }
       }
     }
@@ -131,16 +131,19 @@ public class MSButton
     public void mousePressed () 
     {
         if (isWon() == false && locked == false) {
-          if (flagged == false) {
+          if (mouseButton == LEFT) {
             clicked = true;
           }
           if (mouseButton == RIGHT) {
             if (flagged == false) {
               flagged = true;
-            } else {
+              //clicked = false;
+            } else if (flagged == true) {
               flagged = false;
-              clicked = false;
+              //clicked = false;
             }
+          } else if (flagged == true) {
+            clicked = false;
           } else if (mines.contains(buttons[myRow][myCol])) {
             locked = true;
             displayLosingMessage();
