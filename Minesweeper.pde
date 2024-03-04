@@ -135,7 +135,7 @@ public class MSButton
             clicked = true;
           }
           if (mouseButton == RIGHT) {
-            if (flagged == false) {
+            if (flagged == false && clicked == false) {
               flagged = true;
               //clicked = false;
             } else if (flagged == true) {
